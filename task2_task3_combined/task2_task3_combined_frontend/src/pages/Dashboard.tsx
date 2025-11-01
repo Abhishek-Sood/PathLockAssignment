@@ -77,210 +77,253 @@ export default function Dashboard() {
     <>
       <Navbar />
       <div
-        className="container mt-4"
+      className="container"
+      style={{
+        maxWidth: "90%",
+        margin: "0 auto",
+        background: "#f9fafb",
+        borderRadius: "1rem",
+        padding: "2rem",
+        boxShadow: "0 0.2rem 0.6rem rgba(0,0,0,0.1)",
+      }}
+    >
+      {/* Header */}
+      <h2
         style={{
-          maxWidth: "800px",
-          background: "#f9fafb",
-          borderRadius: "12px",
-          padding: "30px",
-          boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+          fontWeight: 700,
+          textAlign: "center",
+          marginBottom: "2rem",
+          color: "#1f2937",
+          letterSpacing: "0.05rem",
         }}
       >
-        <h2
+        Projects Dashboard
+      </h2>
+
+      {/* Add Project Section */}
+      <div
+        className="card"
+        style={{
+          borderRadius: "0.8rem",
+          border: "0.05rem solid #e5e7eb",
+          background: "#ffffff",
+          padding: "1.5rem",
+          marginBottom: "2rem",
+        }}
+      >
+        <h5
           style={{
-            fontWeight: 700,
-            textAlign: "center",
-            marginBottom: "25px",
-            color: "#1f2937",
-            letterSpacing: "0.5px",
+            fontWeight: 600,
+            color: "#374151",
+            marginBottom: "1rem",
           }}
         >
-          Projects Dashboard
-        </h2>
+          Add New Project
+        </h5>
 
         <div
-          className="card p-3 mb-4 shadow-sm"
           style={{
-            borderRadius: "10px",
-            border: "1px solid #e5e7eb",
-            background: "#ffffff",
-            padding: "20px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "1rem",
           }}
         >
-          <h5 style={{ fontWeight: 600, color: "#374151", marginBottom: "10px" }}>
-            Add New Project
-          </h5>
+          <input
+            className="form-control"
+            placeholder="Project title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            style={{
+              borderRadius: "0.6rem",
+              padding: "0.7rem 1rem",
+              border: "0.05rem solid #d1d5db",
+              boxShadow: "inset 0 0.1rem 0.2rem rgba(0,0,0,0.05)",
+            }}
+          />
 
-          <div className="d-flex flex-column gap-2">
-            <input
-              className="form-control"
-              placeholder="Project title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              style={{
-                borderRadius: "8px",
-                padding: "10px 12px",
-                border: "1px solid #d1d5db",
-                transition: "all 0.2s ease",
-                boxShadow: "inset 0 1px 2px rgba(0,0,0,0.05)",
-              }}
-            />
-            <textarea
-              style={{
-                borderRadius: "8px",
-                padding: "10px 12px",
-                border: "1px solid #d1d5db",
-                transition: "all 0.2s ease",
-                boxShadow: "inset 0 1px 2px rgba(0,0,0,0.05)",
-                resize: "none",
-                minHeight: "70px",
-                visibility: "hidden",
-              }}
-              className="form-control"
-              placeholder="Project description (optional)"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-            <button
-              className="btn btn-primary align-self-start"
-              onClick={addProject}
-              style={{
-                backgroundColor: "#2563eb",
-                border: "none",
-                borderRadius: "8px",
-                padding: "10px 18px",
-                fontWeight: 600,
-                transition: "all 0.2s ease",
-              }}
-              onMouseOver={(e) =>
-                (e.currentTarget.style.backgroundColor = "#1d4ed8")
-              }
-              onMouseOut={(e) =>
-                (e.currentTarget.style.backgroundColor = "#2563eb")
-              }
-            >
-              ➕ Add Project
-            </button>
-          </div>
+          <textarea
+            className="form-control"
+            placeholder="Project description (optional)"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            style={{
+              borderRadius: "0.6rem",
+              padding: "0.7rem 1rem",
+              border: "0.05rem solid #d1d5db",
+              boxShadow: "inset 0 0.1rem 0.2rem rgba(0,0,0,0.05)",
+              resize: "none",
+              minHeight: "6rem",
+            }}
+          />
+
+          <button
+            onClick={addProject}
+            style={{
+              backgroundColor: "#2563eb",
+              border: "none",
+              borderRadius: "0.6rem",
+              padding: "0.8rem 1.2rem",
+              fontWeight: 600,
+              color: "#fff",
+              width: "fit-content",
+              cursor: "pointer",
+              transition: "all 0.2s ease",
+            }}
+            onMouseOver={(e) =>
+              (e.currentTarget.style.backgroundColor = "#1d4ed8")
+            }
+            onMouseOut={(e) =>
+              (e.currentTarget.style.backgroundColor = "#2563eb")
+            }
+          >
+             Add Project
+          </button>
         </div>
+      </div>
 
-        <ul
-          className="list-group"
-          style={{
-            listStyle: "none",
-            padding: 0,
-          }}
-        >
-          {projects.map((p) => (
-            <li
-              key={p.id}
-              className="list-group-item d-flex justify-content-between align-items-start"
-              style={{
-                background: "#ffffff",
-                marginBottom: "12px",
-                borderRadius: "10px",
-                border: "1px solid #e5e7eb",
-                padding: "16px 20px",
-                boxShadow: "0 1px 4px rgba(0,0,0,0.05)",
-                transition: "transform 0.15s ease, box-shadow 0.15s ease",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "scale(1.01)";
-                e.currentTarget.style.boxShadow = "0 3px 10px rgba(0,0,0,0.1)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "scale(1)";
-                e.currentTarget.style.boxShadow = "0 1px 4px rgba(0,0,0,0.05)";
-              }}
-            >
-              <div>
-                <strong>
-                  <Link
-                    to={`/projects/${p.id}`}
+      {/* ✅ Project Cards Grid */}
+      <ul
+        style={{
+          listStyle: "none",
+          padding: 0,
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(22rem, 1fr))",
+          gap: "1.5rem",
+        }}
+      >
+        {projects.map((p) => (
+          <li
+            key={p.id}
+            style={{
+              background: "#ffffff",
+              borderRadius: "0.8rem",
+              border: "0.05rem solid #e5e7eb",
+              padding: "1.2rem 1.5rem",
+              boxShadow: "0 0.1rem 0.3rem rgba(0,0,0,0.05)",
+              transition: "transform 0.15s ease, box-shadow 0.15s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "scale(1.02)";
+              e.currentTarget.style.boxShadow =
+                "0 0.3rem 0.8rem rgba(0,0,0,0.1)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "scale(1)";
+              e.currentTarget.style.boxShadow =
+                "0 0.1rem 0.3rem rgba(0,0,0,0.05)";
+            }}
+          >
+            <div>
+              <strong>
+                <Link
+                  to={`/projects/${p.id}`}
+                  style={{
+                    textDecoration: "none",
+                    color: "#2563eb",
+                    fontSize: "1.2rem",
+                    fontWeight: 600,
+                  }}
+                >
+                  {p.title}
+                </Link>
+              </strong>
+
+              {p.recommendedOrder.length > 0 ? (
+                <div style={{ marginTop: "0.8rem" }}>
+                  <span
                     style={{
-                      textDecoration: "none",
-                      color: "#2563eb",
-                      fontSize: "1.1rem",
+                      color: "#374151",
                       fontWeight: 600,
                     }}
                   >
-                    {p.title}
-                  </Link>
-                </strong>
-                {p.recommendedOrder.length > 0 ? (
-                  <div className="mt-2">
-                    <span
-                      className="fw-bold"
-                      style={{ color: "#374151", fontWeight: 600 }}
-                    >
-                      Recommended Task Order:
-                    </span>
-                    <ol
-                      className="mt-1"
-                      style={{
-                        marginLeft: "18px",
-                        color: "#4b5563",
-                        fontSize: "0.95rem",
-                      }}
-                    >
-                      {p.recommendedOrder.map(
-                        (
-                          task:
-                            | string
-                            | number
-                            | bigint
-                            | boolean
-                            | React.ReactElement
-                            | Iterable<React.ReactNode>
-                            | React.ReactPortal
-                            | Promise<any>
-                            | null
-                            | undefined,
-                          idx: React.Key | null | undefined
-                        ) => (
-                          <li key={idx}>{task}</li>
-                        )
-                      )}
-                    </ol>
-                  </div>
-                ) : (
-                  <p
-                    className="text-muted mb-0"
+                    Recommended Task Order:
+                  </span>
+                  <ol
                     style={{
-                      fontSize: "0.9rem",
-                      color: "#9ca3af",
-                      marginTop: "4px",
+                      marginLeft: "1.5rem",
+                      marginTop: "0.5rem",
+                      color: "#4b5563",
+                      fontSize: "0.95rem",
                     }}
                   >
-                    No tasks yet
-                  </p>
-                )}
-              </div>
+                    {p.recommendedOrder.map((task: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined, idx: React.Key | null | undefined) => (
+                      <li key={idx}>{task}</li>
+                    ))}
+                  </ol>
+                </div>
+              ) : (
+                <p
+                  style={{
+                    fontSize: "0.9rem",
+                    color: "#9ca3af",
+                    marginTop: "0.5rem",
+                  }}
+                >
+                  No tasks yet
+                </p>
+              )}
+            </div>
 
-              <button
-                className="btn btn-sm btn-danger ms-3"
-                onClick={() => deleteProject(p.id)}
-                style={{
-                  borderRadius: "8px",
-                  padding: "6px 12px",
-                  fontWeight: 600,
-                  border: "none",
-                  backgroundColor: "#dc2626",
-                  transition: "all 0.2s ease",
-                }}
-                onMouseOver={(e) =>
-                  (e.currentTarget.style.backgroundColor = "#b91c1c")
-                }
-                onMouseOut={(e) =>
-                  (e.currentTarget.style.backgroundColor = "#dc2626")
-                }
-              >
-                🗑️ Delete
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </>
-  );
+            <button
+              onClick={() => deleteProject(p.id)}
+              style={{
+                borderRadius: "0.6rem",
+                padding: "0.5rem 1rem",
+                fontWeight: 600,
+                border: "none",
+                backgroundColor: "#dc2626",
+                color: "white",
+                marginTop: "1rem",
+                cursor: "pointer",
+                transition: "all 0.2s ease",
+              }}
+              onMouseOver={(e) =>
+                (e.currentTarget.style.backgroundColor = "#b91c1c")
+              }
+              onMouseOut={(e) =>
+                (e.currentTarget.style.backgroundColor = "#dc2626")
+              }
+            >
+              🗑️ Delete
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    {/* ✅ Inline Media Queries */}
+    <style>
+      {`
+        @media (max-width: 768px) {
+          nav {
+            flex-direction: column;
+            gap: 1rem;
+          }
+          .container {
+            padding: 1.5rem;
+          }
+          h2 {
+            font-size: 1.3rem;
+          }
+          ul {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        @media (min-width: 769px) and (max-width: 1200px) {
+          ul {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        @media (min-width: 1201px) {
+          ul {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+      `}
+    </style>
+  </>
+);
 }
+	
