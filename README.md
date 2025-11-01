@@ -6,7 +6,7 @@
 
 Frontend <br>
 npm install axios bootstrap <br>
-npm run<br>
+npm start<br>
 
 Backend <br>
 dotnet run <br>
@@ -17,7 +17,7 @@ dotnet run <br>
 
 Frontend <br>
 npm install axios bootstrap react-router-dom <br>
-npm run
+npm start
 
 Backend<br>
 dotnet add package Microsoft.EntityFrameworkCore<br>
